@@ -28,8 +28,6 @@ const carrinhoController = (app, db) => {
     app.post("/Carrinho", async (request, response) =>{
         try {
             const carrinho = new Car(
-                request.body.usuario_id,
-                request.body.produto_id,
                 request.body.statusCar,
             )
             const retorno = await carDAO.criarCarrinho(carrinho)
@@ -42,8 +40,6 @@ const carrinhoController = (app, db) => {
         try {
             const id = request.params.id
             const carrinho = new Car(
-                request.body.usuario_id,
-                request.body.produto_id,
                 request.body.statusCar,
             )
 

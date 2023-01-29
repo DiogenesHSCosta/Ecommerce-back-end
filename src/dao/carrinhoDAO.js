@@ -32,14 +32,12 @@ class CarDAO{
         })
     }
     criarCarrinho(car){
-        const SQL ="INSERT INTO car(id, usuario_id, produto_id, statusCar) VALUES (?,?,?,?)"
+        const SQL ="INSERT INTO car(id, statusCar) VALUES (?,?)"
 
         return new Promise((res, rej) => {
             this.db.run( SQL,
                 [
                     car.id, 
-                    car.usuario_id, 
-                    car.produto_id, 
                     car.statusCar
                 ],
 
@@ -55,13 +53,11 @@ class CarDAO{
         })
     }
     atualizarCarrinho(carrinho, id){
-        const SQL = "UPDATE car SET usuario_id = ? , produto_id = ?, statusCar = ? WHERE id = ?"
+        const SQL = "UPDATE car SET statusCar = ? WHERE id = ?"
         
         return new Promise((res, rej) =>{
             this.db.run(SQL, 
                 [
-                    carrinho.usuario_id, 
-                    carrinho.produto_id, 
                     carrinho.statusCar,
                     id
                 ],
