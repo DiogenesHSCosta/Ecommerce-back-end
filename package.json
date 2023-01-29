@@ -1,0 +1,21 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "Projeto ecommerce com node e react",
+  "main": "index.js",
+  "author": "Diógenes Costa",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "js-sha256": "^0.9.0",
+    "nodemon": "^2.0.20",
+    "sqlite3": "^5.1.4",
+    "uuid": "^9.0.0"
+  }
+}
