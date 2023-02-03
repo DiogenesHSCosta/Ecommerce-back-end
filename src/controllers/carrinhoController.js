@@ -40,9 +40,7 @@ const carrinhoController = (app, db) => {
     app.put("/Carrinho/:id", async (request, response) =>{
         try {
             const id = request.params.id
-            const carrinho = new Car(
-                request.body.statusCar,
-            )
+            const carrinho = request.body.statusCar
 
             const retorno = await carDAO.atualizarCarrinho(carrinho, id)
             response.send(retorno)

@@ -15,12 +15,12 @@ const RegistroController = (app, db) => {
             console.log(erro)
         }
     })
-    app.get("/Registro/:usuario_id/:produto_id", async (request, response) =>{
+    app.get("/Registro/:carrinho_id/:produto_id", async (request, response) =>{
 
         try {
-            const usuario_id = request.params.usuario_id
+            const carrinho_id = request.params.carrinho_id
             const produto_id = request.params.produto_id
-            const retorno = await recordDAO.selecionarRegistro( usuario_id, produto_id)
+            const retorno = await recordDAO.selecionarRegistro( carrinho_id, produto_id)
             response.send(retorno)
         } catch (erro) {
             console.log(erro)
@@ -30,7 +30,6 @@ const RegistroController = (app, db) => {
         try {
             const Registro = new Record (
                 request.body.carrinho_id,
-                request.body.usuario_id,
                 request.body.produto_id,
                 request.body.qtd,
             )
@@ -40,28 +39,27 @@ const RegistroController = (app, db) => {
             console.log(erro)
         }
     })
-    app.put("/Registro/:usuario_id/:produto_id", async (request, response) =>{
+    app.put("/Registro/:carrinho_id/:produto_id", async (request, response) =>{
         try {
-            const usuario_id = request.params.usuario_id
+            const carrinho_id = request.params.carrinho_id
             const produto_id = request.params.produto_id
             const Registro = new Record (
                 request.body.carrinho_id,
-                request.body.usuario_id,
                 request.body.produto_id,
                 request.body.qtd,
             )
 
-            const retorno = await recordDAO.atualizarRegistro(Registro, usuario_id, produto_id)
+            const retorno = await recordDAO.atualizarRegistro(Registro, carrinho_id, produto_id)
             response.send(retorno)
         } catch (erro) {
             console.log(erro)
         }
     })
-    app.delete("/Registro/:usuario_id/:produto_id", async (request, response) =>{
+    app.delete("/Registro/:carrinho_id/:produto_id", async (request, response) =>{
         try {
-            const usuario_id = request.params.usuario_id
+            const carrinho_id = request.params.carrinho_id
             const produto_id = request.params.produto_id
-            const retorno = await recordDAO.deletarRegistro(usuario_id, produto_id)
+            const retorno = await recordDAO.deletarRegistro(carrinho_id, produto_id)
             response.send(retorno)
         } catch (erro) {
             console.log(erro)

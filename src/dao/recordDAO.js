@@ -17,11 +17,11 @@ class RecordDAO{
             })
         })
     }
-    selecionarRegistro( usuario_id, produto_id){
-        const SQL = "SELECT * FROM purchase_record WHERE usuario_id = ? AND produto_id = ?"
+    selecionarRegistro( carrinho_id, produto_id){
+        const SQL = "SELECT * FROM purchase_record WHERE carrinho_id = ? AND produto_id = ?"
 
         return new Promise((res, rej) =>{
-            this.db.all(SQL, [usuario_id, produto_id] , (erro, linhas) =>{
+            this.db.all(SQL, [carrinho_id, produto_id] , (erro, linhas) =>{
                 if(!erro){
                     res(linhas)
                 }
@@ -32,13 +32,12 @@ class RecordDAO{
         })
     }
     criarRegistro(Registro){
-        const SQL ="INSERT INTO purchase_record(carrinho_id, usuario_id, produto_id, qtd) VALUES (?,?,?,?)"
+        const SQL ="INSERT INTO purchase_record(carrinho_id, produto_id, qtd) VALUES (?,?,?)"
 
         return new Promise((res, rej) => {
             this.db.run( SQL,
                 [
                     Registro.carrinho_id, 
-                    Registro.usuario_id, 
                     Registro.produto_id, 
                     Registro.qtd
                 ],
@@ -54,17 +53,16 @@ class RecordDAO{
             );
         })
     }
-    atualizarRegistro(Registro, usuario_id, produto_id){
-        const SQL = "UPDATE purchase_record SET carrinho_id = ?, usuario_id = ? , produto_id = ?, qtd = ? WHERE usuario_id = ? AND produto_id = ?"
+    atualizarRegistro(Registro, carrinho_id, produto_id){
+        const SQL = "UPDATE purchase_record SET carrinho_id = ? , produto_id = ?, qtd = ? WHERE carrinho_id = ? AND produto_id = ?"
         
         return new Promise((res, rej) =>{
             this.db.run(SQL, 
                 [
                     Registro.carrinho_id, 
-                    Registro.usuario_id, 
                     Registro.produto_id, 
                     Registro.qtd,
-                    usuario_id,
+                    carrinho_id,
                     produto_id
                 ],
                 (erro) =>{
@@ -76,12 +74,12 @@ class RecordDAO{
                 )
         })
     }
-    deletarRegistro(usuario_id, produto_id){
-        let SQL = "DELETE FROM purchase_record WHERE usuario_id = ? AND produto_id = ?"
+    deletarRegistro(carrinho_id, produto_id){
+        let SQL = "DELETE FROM purchase_record WHERE carrinho_id = ? AND produto_id = ?"
 
         return new Promise((res, rej) =>{
 
-            this.db.run(SQL, [usuario_id, produto_id], (erro)=>{
+            this.db.run(SQL, [carrinho_id, produto_id], (erro)=>{
                 if(!erro){
                     res("Registro deletado")
                 }

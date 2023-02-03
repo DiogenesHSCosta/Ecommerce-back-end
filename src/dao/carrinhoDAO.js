@@ -58,7 +58,7 @@ class CarDAO{
         return new Promise((res, rej) =>{
             this.db.run(SQL, 
                 [
-                    carrinho.statusCar,
+                    carrinho,
                     id
                 ],
                 (erro) =>{
