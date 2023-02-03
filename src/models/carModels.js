@@ -1,9 +1,9 @@
 import { v4 as uuidv4 } from "uuid"
 
 class Car{
-    constructor(statusCar){
+    constructor(usuario_id){
         this.id =  uuidv4()
-        this.statusCar = statusCar
+        this.usuario_id = usuario_id
     }
 }
 

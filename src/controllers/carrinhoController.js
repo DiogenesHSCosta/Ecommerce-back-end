@@ -28,8 +28,9 @@ const carrinhoController = (app, db) => {
     app.post("/Carrinho", async (request, response) =>{
         try {
             const carrinho = new Car(
-                request.body.statusCar,
+                request.body.usuario_id
             )
+            
             const retorno = await carDAO.criarCarrinho(carrinho)
             response.send(retorno)
         } catch (erro) {

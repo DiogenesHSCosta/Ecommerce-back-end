@@ -42,20 +42,22 @@ CREATE TABLE product(
 const CAR_SCHEMAS =`
 CREATE TABLE car(
     id VARCHAR(50) PRIMARY KEY,
-    statusCar VARCHAR(10) NOT NULL
+    usuario_id VARCHAR(50),
+    statusCar VARCHAR(10) DEFAULT Salvo,
+    
+
+    FOREIGN KEY (usuario_id) REFERENCES user(id)
 )
 `
 const record_SCHEMAS=`
 CREATE TABLE purchase_record(
     carrinho_id VARCHAR(50)  NOT NULL,
-    usuario_id VARCHAR(50),
     produto_id VARCHAR(50),
     qtd INT NOT NULL,
 
-    PRIMARY KEY(usuario_id, produto_id),
-    
+    PRIMARY KEY(carrinho_id, produto_id),
+
     FOREIGN KEY (carrinho_id) REFERENCES user(id),
-    FOREIGN KEY (usuario_id) REFERENCES user(id),
     FOREIGN KEY (produto_id) REFERENCES product(id)
 )`
 
