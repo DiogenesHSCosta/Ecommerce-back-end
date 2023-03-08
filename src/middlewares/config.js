@@ -10,7 +10,7 @@ const middlewares = (app, Express, cors)=>{
   
     //Impedir que outros https, tirando o nosso, acessem a API
     const options ={
-      origin: ["*"]
+      origin: "*"
     }
   
     app.use(cors(options))

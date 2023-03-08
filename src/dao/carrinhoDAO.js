@@ -65,7 +65,9 @@ class CarDAO{
                     if(!erro){
                         res("Carrinho Alterado com sucesso!")
                     }
-                    else(erro)
+                    else{
+                        rej(erro)
+                    }
                 }
                 )
         })
