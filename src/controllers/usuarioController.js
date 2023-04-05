@@ -29,6 +29,7 @@ const usuarioController = (app, db)=>{
         } 
         catch (erro) {
             console.log(erro)
+            response.status(401).send("Não foi possivel criar esse usuario. Email já utilizado")
         }
     })
 

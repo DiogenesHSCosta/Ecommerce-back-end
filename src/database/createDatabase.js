@@ -26,7 +26,7 @@ const USER_SCHEMAS = `
 CREATE TABLE user (
     id VARCHAR(50) PRIMARY KEY,
     nome VARCHAR(80) NOT NULL, 
-    email VARCHAR(80) NOT NULL,
+    email VARCHAR(80) UNIQUE NOT NULL,
     senha VARCHAR(100) NOT NULL
 )`
 //Criação da tabela Product
@@ -34,6 +34,8 @@ const PRODUCT_SCHEMAS=`
 CREATE TABLE product(
     id VARCHAR(50) PRIMARY KEY,
     titulo VARCHAR(80) NOT NULL,
+    autor VARCHAR(80) NOT NULL,
+    genero VARCHAR(30) NOT NULL,
     descricao VARCHAR(150) null,
     valor FLOAT
 )
@@ -42,11 +44,7 @@ CREATE TABLE product(
 const CAR_SCHEMAS =`
 CREATE TABLE car(
     id VARCHAR(50) PRIMARY KEY,
-    usuario_id VARCHAR(50),
-    statusCar VARCHAR(10) DEFAULT Salvo,
-    
-
-    FOREIGN KEY (usuario_id) REFERENCES user(id)
+    statusCar VARCHAR(10) DEFAULT Salvo
 )
 `
 const record_SCHEMAS=`

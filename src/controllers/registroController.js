@@ -1,15 +1,15 @@
 
-import RecordDAO from "../dao/recordDAO.js"
+import RegistroDAO from "../dao/registroDAO.js";
 import Record from "../models/recordModel.js";
-
+import { verificarJWT } from "./autenticarControllers.js";
 
 const RegistroController = (app, db) => {
 
-    const recordDAO = new RecordDAO(db);
+    const registroDAO = new RegistroDAO(db);
  
-    app.get("/Registro", async (request, response) =>{
+    app.get("/Registro", verificarJWT, async (request, response) =>{
         try {
-            const retorno = await recordDAO.selecionarTodosRegistros()
+            const retorno = await registroDAO.selecionarTodosRegistros()
             response.send(retorno)
         } catch (erro) {
             console.log(erro)
@@ -20,7 +20,7 @@ const RegistroController = (app, db) => {
         try {
             const carrinho_id = request.params.carrinho_id
             const produto_id = request.params.produto_id
-            const retorno = await recordDAO.selecionarRegistro( carrinho_id, produto_id)
+            const retorno = await registroDAO.selecionarRegistro( carrinho_id, produto_id)
             response.send(retorno)
         } catch (erro) {
             console.log(erro)
@@ -33,13 +33,13 @@ const RegistroController = (app, db) => {
                 request.body.produto_id,
                 request.body.qtd,
             )
-            const retorno = await recordDAO.criarRegistro(Registro)
+            const retorno = await registroDAO.criarRegistro(Registro)
             response.send(retorno)
         } catch (erro) {
             console.log(erro)
         }
     })
-    app.put("/Registro/:carrinho_id/:produto_id", async (request, response) =>{
+    app.put("/Registro/:carrinho_id/:produto_id", verificarJWT, async (request, response) =>{
         try {
             const carrinho_id = request.params.carrinho_id
             const produto_id = request.params.produto_id
@@ -49,7 +49,7 @@ const RegistroController = (app, db) => {
                 request.body.qtd,
             )
 
-            const retorno = await recordDAO.atualizarRegistro(Registro, carrinho_id, produto_id)
+            const retorno = await registroDAO.atualizarRegistro(Registro, carrinho_id, produto_id)
             response.send(retorno)
         } catch (erro) {
             console.log(erro)
@@ -59,7 +59,7 @@ const RegistroController = (app, db) => {
         try {
             const carrinho_id = request.params.carrinho_id
             const produto_id = request.params.produto_id
-            const retorno = await recordDAO.deletarRegistro(carrinho_id, produto_id)
+            const retorno = await registroDAO.deletarRegistro(carrinho_id, produto_id)
             response.send(retorno)
         } catch (erro) {
             console.log(erro)

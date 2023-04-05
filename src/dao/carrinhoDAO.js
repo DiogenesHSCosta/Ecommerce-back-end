@@ -32,13 +32,12 @@ class CarDAO{
         })
     }
     criarCarrinho(car){
-        const SQL ="INSERT INTO car(id, usuario_id) VALUES (?, ?)"
+        const SQL ="INSERT INTO car(id) VALUES (?)"
 
         return new Promise((res, rej) => {
             this.db.run( SQL,
                 [
                     car.id, 
-                    car.usuario_id
                 ],
 
                 (erro) => {

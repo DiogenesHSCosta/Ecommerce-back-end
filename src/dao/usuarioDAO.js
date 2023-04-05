@@ -19,7 +19,10 @@ class UserDao{
     }
     criarUsuario(usuario){
 
-        let SQL = "INSERT INTO user(id, nome, email, senha) VALUES (?,?,?,?)";
+        let SQL = `INSERT INTO user(id, nome, email, senha) VALUES (?,?,?,?);
+                   `;
+
+        const SQL2 ='INSERT INTO car(id) VALUES (?);'
 
         return new Promise((res, rej) => {
             this.db.all( SQL,
@@ -28,14 +31,22 @@ class UserDao{
                     usuario.nome, 
                     usuario.email, 
                     usuario.senha
+                    // usuario.id
                 ],
 
                 (erro) => {
                     if (!erro) {
-                        res("Usuario cadastrado com sucesso");
+                        this.db.all(SQL2, usuario.id,(erroC) =>{
+                            if (!erroC) {
+                                    res(`cliente cadastrado com sucesso`);
+                                } 
+                                else {
+                                    rej(erroC);
+                                }
+                        })
                     } 
                     else {
-                        rej(erro);
+                        rej(erro)
                     }
                 }
             );

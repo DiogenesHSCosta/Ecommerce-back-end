@@ -1,4 +1,4 @@
-class RecordDAO{
+class RegistroDAO{
     constructor(db){
         this.db = db
     }
@@ -17,7 +17,7 @@ class RecordDAO{
             })
         })
     }
-    selecionarRegistro( carrinho_id, produto_id){
+    selecionarRegistro(carrinho_id, produto_id){
         const SQL = "SELECT * FROM purchase_record WHERE carrinho_id = ? AND produto_id = ?"
 
         return new Promise((res, rej) =>{
@@ -91,4 +91,4 @@ class RecordDAO{
     }
 }
 
-export default RecordDAO
+export default RegistroDAO

@@ -1,15 +1,15 @@
 import { response } from "express"
-import ProductDAO from "../dao/productDAO.js"
+import ProdutoDAO from "../dao/produtoDAO.js"
 import Product from "../models/productModels.js"
 
 const produtosController = (app, db) => {
     
-    const productDAO  = new ProductDAO (db)
+    const produtoDAO  = new ProdutoDAO (db)
 
     //selecionar todos os itens 
     app.get("/Produto", async (request, response) =>{
         try {
-            const retorno = await productDAO.selecionarTodosProdutos()
+            const retorno = await produtoDAO.selecionarTodosProdutos()
             response.json(retorno)
         } 
         catch (erro) {
@@ -21,7 +21,7 @@ const produtosController = (app, db) => {
     app.get("/Produto/:id", async (request, response) =>{
         try {
             const id = request.params.id
-            const retorno = await productDAO.selecionarProduto(id)
+            const retorno = await produtoDAO.selecionarProduto(id)
             response.json(retorno)
         } 
         catch (erro) {
@@ -36,10 +36,13 @@ const produtosController = (app, db) => {
         try {
             const Produto = new Product(
                 request.body.titulo,
+                request.body.autor,
+                request.body.genero,
                 request.body.descricao,
                 request.body.valor
+                
             )
-            const retorno = await productDAO.criarProduto(Produto)
+            const retorno = await produtoDAO.criarProduto(Produto)
             response.send(retorno)
         } 
         catch (erro) {
@@ -54,11 +57,13 @@ const produtosController = (app, db) => {
             const id = request.params.id
             const Produto = new Product(
                 request.body.titulo,
+                request.body.autor,
+                request.body.genero,
                 request.body.descricao,
                 request.body.valor
             )
 
-            const retorno = await productDAO.atualizarProduto(Produto, id)
+            const retorno = await produtoDAO.atualizarProduto(Produto, id)
             response.send(retorno)
         } 
         catch (erro) {
@@ -70,7 +75,7 @@ const produtosController = (app, db) => {
 
         try {
             const id = request.params.id
-            let retorno = await productDAO.deletarProduto(id)
+            let retorno = await produtoDAO.deletarProduto(id)
             response.send(retorno)
           } 
           catch (erro) {

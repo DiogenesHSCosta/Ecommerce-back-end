@@ -1,4 +1,4 @@
-class ProductDAO{
+class ProdutoDAO{
     constructor(db){
         this.db = db
     }
@@ -32,13 +32,15 @@ class ProductDAO{
         })
     }
     criarProduto(produto){
-        let SQL = "INSERT INTO product(id, titulo, descricao, valor) VALUES (?,?,?,?)";
+        let SQL = "INSERT INTO product(id, titulo, autor, genero, descricao, valor) VALUES (?,?,?,?,?,?)";
 
         return new Promise((res, rej) => {
             this.db.run( SQL,
                 [
                     produto.id, 
                     produto.titulo, 
+                    produto.autor,
+                    produto.genero,
                     produto.descricao, 
                     produto.valor
                 ],
@@ -55,12 +57,14 @@ class ProductDAO{
         })
     }
     atualizarProduto(produto, id){
-        const SQL = "UPDATE product SET titulo = ? , descricao = ?, valor = ? WHERE id = ?"
+        const SQL = "UPDATE product SET titulo = ? , autor = ?, genero = ? descricao = ?, valor = ? WHERE id = ?"
         
         return new Promise((res, rej) =>{
             this.db.run(SQL, 
                 [
                     produto.titulo, 
+                    produto.autor,
+                    produto.genero,
                     produto.descricao, 
                     produto.valor,
                     id
@@ -90,4 +94,4 @@ class ProductDAO{
         })
     }
 }
-export default ProductDAO
+export default ProdutoDAO
